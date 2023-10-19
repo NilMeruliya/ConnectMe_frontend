@@ -4,6 +4,8 @@ import axios from "axios";
 const ENDPOINT_AUTH = `${process.env.REACT_APP_BACKEND_ENDPOINT}/auth`;
 
 const initialState = {
+  status: "",
+  error: "",
   user: {
     id: "",
     name: "",
@@ -12,12 +14,10 @@ const initialState = {
     status: "",
     token: "",
     password: ""
-  },
-  status: "",
-  error: "",
+  }
 };
 
-export const userRegister = createAsyncThunk('auth/register', async (values, {rejectWithValue}) => {
+export const userRegister = createAsyncThunk('auth/register', async (values, { rejectWithValue }) => {
 
   try {
     const {data} = await axios.post(`${ENDPOINT_AUTH}/register`, {...values})
@@ -29,12 +29,14 @@ export const userRegister = createAsyncThunk('auth/register', async (values, {re
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: initialState,
+  initialState,
   // can also be written as below as we have same key and value.
   // initialstate
 
   reducers: {
     logout: (state) => {
+      state.status = "";
+      state.error = ""
       state.user = {
         id: "",
         name: "",
@@ -43,8 +45,7 @@ export const userSlice = createSlice({
         status: "",
         token: "",
       };
-      state.status = "";
-      state.error = ""
+      
     },
   },
 

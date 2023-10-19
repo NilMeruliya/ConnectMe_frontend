@@ -34,10 +34,10 @@ const App = () => {
         <Route path='register/' element={<Register/>}/>
       </Routes>
     </BrowserRouter>
-
+{/* 
     <button onClick={() => {
       dispatch(logout());
-    }}>logout</button>
+    }}>logout</button> */}
     </div>
     </>
   )
