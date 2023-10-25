@@ -1,23 +1,35 @@
-
 import { yupResolver } from '@hookform/resolvers/yup' 
 import AuthInput from "./AuthInput";
-
-import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
+import { Link, useNavigate } from "react-router-dom";
 import { signInSchema } from "../../utils/validationUtil";
 import { useForm } from 'react-hook-form';
+import { userLogin } from '../../itemSlices/userSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function LoginForm() {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {status, error} = useSelector((state) => state.user)
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signInSchema)
   })
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async (val) => {
+    const res = await dispatch(userLogin({...val}))
+    if (res?.payload?.user) {
+      navigate("/");
+    }
+    console.log(val);
+    console.log(res);
+  }
   
   return (
     <div className="min-h-screen w-full flex items-center justify-center overflow-hidden">
@@ -36,10 +48,9 @@ export default function LoginForm() {
           <AuthInput
            placeholder="Email address"
            name="email"
-            type="text"
+           type="text"
             register={register}  // using react-form
             error={errors?.email?.message} // using react-form
-     
           />
           <AuthInput
             placeholder="Password"
@@ -49,6 +60,10 @@ export default function LoginForm() {
             error={errors?.password?.message} // using react-form
           />
 
+          {/* if we have any errors */}
+          {
+            error ? <div> <p className="text-red-400">{error}</p> </div> : null
+          }
          
           <button
             className="w-full flex justify-center bg-blue2 text-gray-100 p-4 rounded-full tracking-wide
@@ -56,7 +71,9 @@ export default function LoginForm() {
           "
             type="submit"
           >
-           Login
+           {status === "loading" ? <BeatLoader  color="#fff" size={16}/> : "Login"}
+          {/* https://www.davidhu.io/react-spinners/  */}
+           
           </button>
           
           <p className="flex flex-col items-center justify-center mt-10 text-center text-md dark:text-dark_text1">

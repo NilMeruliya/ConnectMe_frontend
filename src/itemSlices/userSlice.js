@@ -20,9 +20,25 @@ const initialState = {
 export const userRegister = createAsyncThunk('auth/register', async (values, { rejectWithValue }) => {
 
   try {
-    const {data} = await axios.post(`${ENDPOINT_AUTH}/register`, {...values})
+    console.log("before")
+    const {data} = await axios.post(`${ENDPOINT_AUTH}/register`, {...values});
+    console.log("check data here");
+    console.log(data);
     return data;
   } catch (error) {
+    console.log(`register error`);
+    console.log(error.response);
+    return rejectWithValue(error?.response?.data?.error)
+  }
+})
+
+export const userLogin = createAsyncThunk('auth/login', async (values, { rejectWithValue }) => {
+
+  try {
+    const {data} = await axios.post(`${ENDPOINT_AUTH}/login`, {...values})
+    return data;
+  } catch (error) {
+    console.log(`login error, ${error}`);
     return rejectWithValue(error.response.data.message)
   }
 })
@@ -45,8 +61,10 @@ export const userSlice = createSlice({
         status: "",
         token: "",
       };
-      
     },
+    changeStatus: (state, action) => {
+      state.status = action.payload;
+    }
   },
 
   extraReducers(builder){
@@ -61,11 +79,22 @@ export const userSlice = createSlice({
     .addCase(userRegister.rejected,  (state, action) => {
       state.status = 'failed'; //.status = initialState
       state.error = action.payload;
-      
+    })
+    .addCase(userLogin.pending, (state, action) => {
+      state.status = 'loading';
+    })
+    .addCase(userLogin.fulfilled,  (state, action) => {
+      state.status = 'succeeded'; //.status = initialState
+      state.error = "";
+      state.user = action.payload.user; //.user = initialState
+    })
+    .addCase(userLogin.rejected,  (state, action) => {
+      state.status = 'failed'; //.status = initialState
+      state.error = action.payload;
     })
   }
 });
 
-export const {logout} = userSlice.actions;
+export const {logout, changeStatus} = userSlice.actions;
 
 export default userSlice.reducer;

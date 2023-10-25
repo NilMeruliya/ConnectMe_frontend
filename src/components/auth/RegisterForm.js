@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signUpSchema } from "../../utils/validationUtil.js";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
-import { userRegister } from "../../itemSlices/userSlice";
+import { changeStatus, userRegister } from "../../itemSlices/userSlice";
 import { useState } from "react";
 import Image from "./Image";
 import axios from "axios";
@@ -36,6 +36,7 @@ export default function RegisterForm() {
   // submit the form
 
   const onSubmit = async (userData) => {
+    dispatch(changeStatus("loading"));
     if (image) {
       //upload to cloudinary and then register user
       await uploadImage().then(async (response) => {
