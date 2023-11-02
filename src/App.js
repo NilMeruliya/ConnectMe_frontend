@@ -4,11 +4,11 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "./itemSlices/userSlice";
+// import { logout } from "./itemSlices/userSlice";
 
 const App = () => {
   // set redux data to redux toolkit
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // fetch data from redux toolkit to frontend
   // const { user } = useSelector((state) => ({ ...state }));
@@ -48,9 +48,9 @@ const App = () => {
           </Routes>
         </BrowserRouter>
 
-        <button onClick={() => {
+        {/* <button onClick={() => {
       dispatch(logout());
-    }}>logout</button>
+    }}>logout</button> */}
       </div>
     </>
   );
