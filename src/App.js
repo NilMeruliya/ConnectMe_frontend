@@ -24,10 +24,10 @@ const App = () => {
   //       token: ""
 
   const { user } = useSelector((state) => state.user);
-  const { accessToken: token } = user;
+  const { token } = user;
 
-  console.log(user);
-  console.log(token);
+  // console.log(user);
+  // console.log(token);
   return (
     <>
       <div className="dark">
@@ -48,9 +48,9 @@ const App = () => {
           </Routes>
         </BrowserRouter>
 
-        {/* <button onClick={() => {
+        <button onClick={() => {
       dispatch(logout());
-    }}>logout</button> */}
+    }}>logout</button>
       </div>
     </>
   );
