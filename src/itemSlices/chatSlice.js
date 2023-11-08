@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const CHAT_ENDPOINT = `${process.env.REACT_APP_BACKEND_ENDPOINT}/chat`;
-// const MESSAGE_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}/message`;
+const MESSAGE_ENDPOINT = `${process.env.REACT_APP_BACKEND_ENDPOINT}/message`;
 
 const initialState = {
     status: "",
@@ -11,7 +11,7 @@ const initialState = {
     activeConversation: {},
     messages: [],
     notifications: [],
-    files: [],
+    // files: [],
   };
 
   // get all conversations
@@ -29,6 +29,72 @@ const initialState = {
         return data;
       } catch (error) {
         
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+  
+
+  export const openOrCreateUserConversations = createAsyncThunk(
+    "chat/openorcreate",
+    async (values, { rejectWithValue }) => {
+      const {token, receiverId} = values;
+      try {
+
+        // here we are sending receiverId to the backend because we create a new conversation with the receiverId
+        const { data } = await axios.post(CHAT_ENDPOINT, {receiverId}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        // console.log(data);
+        return data;
+      } catch (error) {
+        
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+
+  export const getUserConversationMessages = createAsyncThunk(
+    "chat/messages",
+    async (values, { rejectWithValue }) => {
+      const { token, chatId } = values;
+      try {
+        const { data } = await axios.get(`${MESSAGE_ENDPOINT}/${chatId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return data;
+        
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  );
+
+  // send messages from the input to the backend
+  export const sendUserMessage = createAsyncThunk(
+    "message/send",
+    async (values, { rejectWithValue }) => {
+      const { token, inputMessage, chatId, files } = values;
+      try {
+        const { data } = await axios.post(
+          MESSAGE_ENDPOINT,
+          {
+            message: inputMessage,
+            chatId,
+            files,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return data;
+      } catch (error) {
         return rejectWithValue(error.message);
       }
     }
@@ -86,50 +152,50 @@ export const chatSlice = createSlice({
           state.error = action.payload;
           console.log(action.payload);
         })
-    //     .addCase(open_create_conversation.pending, (state, action) => {
-    //       state.status = "loading";
-    //     })
-    //     .addCase(open_create_conversation.fulfilled, (state, action) => {
-    //       state.status = "succeeded";
-    //       state.activeConversation = action.payload;
-    //       state.files = [];
-    //     })
-    //     .addCase(open_create_conversation.rejected, (state, action) => {
-    //       state.status = "failed";
-    //       state.error = action.payload;
-    //     })
-    //     .addCase(getConversationMessages.pending, (state, action) => {
-    //       state.status = "loading";
-    //     })
-    //     .addCase(getConversationMessages.fulfilled, (state, action) => {
-    //       state.status = "succeeded";
-    //       state.messages = action.payload;
-    //     })
-    //     .addCase(getConversationMessages.rejected, (state, action) => {
-    //       state.status = "failed";
-    //       state.error = action.payload;
-    //     })
-    //     .addCase(sendMessage.pending, (state, action) => {
-    //       state.status = "loading";
-    //     })
-    //     .addCase(sendMessage.fulfilled, (state, action) => {
-    //       state.status = "succeeded";
-    //       state.messages = [...state.messages, action.payload];
-    //       let conversation = {
-    //         ...action.payload.conversation,
-    //         latestMessage: action.payload,
-    //       };
-    //       let newConvos = [...state.conversations].filter(
-    //         (c) => c._id !== conversation._id
-    //       );
-    //       newConvos.unshift(conversation);
-    //       state.conversations = newConvos;
-    //       state.files = [];
-    //     })
-    //     .addCase(sendMessage.rejected, (state, action) => {
-    //       state.status = "failed";
-    //       state.error = action.payload;
-    //     });
+        .addCase(openOrCreateUserConversations.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(openOrCreateUserConversations.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.activeConversation = action.payload;
+          state.files = [];
+        })
+        .addCase(openOrCreateUserConversations.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        })
+        .addCase(getUserConversationMessages.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(getUserConversationMessages.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.messages = action.payload;
+        })
+        .addCase(getUserConversationMessages.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        })
+        .addCase(sendUserMessage.pending, (state, action) => {
+          state.status = "loading";
+        })
+        .addCase(sendUserMessage.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.messages = [...state.messages, action.payload];
+          // let conversation = {
+          //   ...action.payload.conversation,
+          //   latestMessage: action.payload,
+          // };
+          // let newConvos = [...state.conversations].filter(
+          //   (c) => c._id !== conversation._id
+          // );
+          // newConvos.unshift(conversation);
+          // state.conversations = newConvos;
+          // state.files = [];
+        })
+        .addCase(sendUserMessage.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
+        });
     },
   });
 

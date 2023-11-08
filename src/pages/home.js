@@ -3,6 +3,9 @@ import Sidebar from '../components'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getUserConversations } from '../itemSlices/chatSlice';
+import WelcomePage from '../components/chat';
+import DisplayChat from '../components/chat/DisplayChat';
+
 
 
 const Home = () => {
@@ -10,6 +13,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   console.log(user);
+
+  const { activeConversation } = useSelector((state) => state.chat);
+  console.log("activeConversation");
+  console.log(activeConversation);
 
 
   //get Conversations
@@ -30,15 +37,18 @@ const Home = () => {
         //  onlineUsers={onlineUsers}
         //   typing={typing}
            />
-        {/* {activeConversation._id ? (
-          <ChatContainer
-            onlineUsers={onlineUsers}
-            callUser={callUser}
-            typing={typing}
+
+
+      
+        {activeConversation._id ? (
+          <DisplayChat
+            // onlineUsers={onlineUsers}
+            // callUser={callUser}
+            // typing={typing}
           />
         ) : (
-          <WhatsappHome />
-        )} */}
+          <WelcomePage />
+        )}
       </div>
     </div>
     {/*Call*/}

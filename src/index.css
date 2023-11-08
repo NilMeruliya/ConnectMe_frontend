@@ -8,6 +8,10 @@
         max-width: 1600px;
       }
 
+      .flex30 {
+        flex: 0 0 30%;
+      }
+
       .btn {
         @apply w-[40px] h-[40px] rounded-full flex items-center justify-center active:bg-dark_hover1;
       }
@@ -35,6 +39,12 @@
         overflow-y: auto;
         overflow-x: hidden;
       }
+
+      .overflow_scrollbar {
+        height: calc(100vh - 155px);
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
 }
 
 
@@ -49,6 +59,15 @@
   }
 }
 
+
+.openEmojiAnimation {
+  animation: openAn 0.1s forwards;
+}
+@keyframes openAn {
+  0% {
+    transform: translateY(60px);
+  }
+}
 
 /*----Custom scrollbar----*/
 /*--Width--*/

@@ -1,9 +1,27 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { openOrCreateUserConversations } from '../../../itemSlices/chatSlice';
 
 const Contact = ({contact}) => {
+
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  // const { token } = user;
+  // const { activeConversation } = useSelector((state) => state.chat);
+  
+  const values = {
+    receiverId: contact._id,
+   token: user.token,
+  };
+
+  const openConversation = async () => {
+    dispatch(openOrCreateUserConversations(values));
+   
+  };
+
   return (
     <li
-    // onClick={() => openConversation()}
+    onClick={() => openConversation()}
     className="list-none h-[72px] hover:dark:bg-dark_bg2 cursor-pointer dark:text-dark_text1 px-[10px]"
   >
     {/*Container*/}
