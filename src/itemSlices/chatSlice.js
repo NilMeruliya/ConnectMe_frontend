@@ -181,16 +181,18 @@ export const chatSlice = createSlice({
         .addCase(sendUserMessage.fulfilled, (state, action) => {
           state.status = "succeeded";
           state.messages = [...state.messages, action.payload];
-          // let conversation = {
-          //   ...action.payload.conversation,
-          //   latestMessage: action.payload,
-          // };
-          // let newConvos = [...state.conversations].filter(
-          //   (c) => c._id !== conversation._id
-          // );
-          // newConvos.unshift(conversation);
-          // state.conversations = newConvos;
-          // state.files = [];
+
+          // it automatically adds the new message to the active conversation and update the last message in the list of messages in the active conversation
+          let chat = {
+            ...action.payload.chat,
+            latestMessage: action.payload,
+          };
+          let newChats = [...state.conversations].filter(
+            (c) => c._id !== chat._id
+          );
+          newChats.unshift(chat);
+          state.conversations = newChats;
+          state.files = [];
         })
         .addCase(sendUserMessage.rejected, (state, action) => {
           state.status = "failed";

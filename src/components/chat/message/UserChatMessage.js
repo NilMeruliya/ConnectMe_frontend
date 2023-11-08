@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
 import Message from './Message';
 
 const UserChatMessage = () => {
+  const endReference = useRef();
+
   const { messages } = useSelector((state) => state.chat);
   console.log("messages");
   console.log(messages);
   const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+      endReference.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   return (
     <div
     className="mb-[60px] bg-[url('https://res.cloudinary.com/dmhcnhtng/image/upload/v1677358270/Untitled-1_copy_rpx8yb.jpg')]
@@ -27,7 +34,7 @@ const UserChatMessage = () => {
                 />
           ))}
       <div className="mt-2"
-    //    ref={endRef}
+       ref={endReference}
        ></div>
     </div>
   </div>

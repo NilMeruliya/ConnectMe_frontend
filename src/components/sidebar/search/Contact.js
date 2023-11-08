@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { openOrCreateUserConversations } from '../../../itemSlices/chatSlice';
 
-const Contact = ({contact}) => {
+const Contact = ({contact, setSearchResult}) => {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -15,8 +15,8 @@ const Contact = ({contact}) => {
   };
 
   const openConversation = async () => {
-    dispatch(openOrCreateUserConversations(values));
-   
+  await  dispatch(openOrCreateUserConversations(values));
+  setSearchResult([]);
   };
 
   return (
