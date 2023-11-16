@@ -40,6 +40,10 @@
         overflow-x: hidden;
       }
 
+      .online {
+        border: 2px solid #00a884;
+      }
+
       .overflow_scrollbar {
         height: calc(100vh - 155px);
         overflow-y: auto;

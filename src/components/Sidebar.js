@@ -5,7 +5,7 @@ import Search from './sidebar/search/Search';
 import SearchResult from './sidebar/search/SearchResult';
 import Chats from './sidebar/chats/Chats';
 
-const Sidebar = () => {
+const Sidebar = ({onlineUsers}) => {
   const [searchResult, setSearchResult] = useState([]);
   // console.log(searchResult);
   return (
@@ -29,7 +29,7 @@ const Sidebar = () => {
         </>
       ) : (
         <>
-          <Chats />
+          <Chats onlineUsers={onlineUsers}/>
         </>
       )}
     </div>

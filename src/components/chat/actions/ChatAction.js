@@ -6,10 +6,11 @@ import { SendIcon } from '../../../svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { sendUserMessage } from '../../../itemSlices/chatSlice.js'
 import { ClipLoader } from 'react-spinners'
+import SocketContext from '../../../context/SocketContext'
 
-const ChatAction = () => {
+const ChatAction = ({socket}) => {
     const dispatch = useDispatch();
- 
+      
     const { activeConversation, status } = useSelector((state) => state.chat);
     const { user } = useSelector((state) => state.user);
     const { token } = user;
@@ -26,21 +27,23 @@ const ChatAction = () => {
         files: [],
         token,
       };
-      console.log("values at chat action", values);
-      console.log(values);
+      // console.log("values at chat action", values);
+      // console.log(values);
    
    
 
     const SendMessageHandler = async (e) => {
         e.preventDefault();
-        setLoading(true);
-         await dispatch(sendUserMessage(values));
-         setInputMessage("")
-         setLoading(false);
+        setLoading(true); 
+        let newMessage = await dispatch(sendUserMessage(values));
+        // console.log("new message:", newMessage);
+        socket.emit("send message", newMessage.payload);
+        setInputMessage("")
+        setLoading(false);
       };
 
-      console.log("status of input message");
-      console.log(status);
+      // console.log("status of input message");
+      // console.log(status);
   return (
     <form
       onSubmit={(e) => SendMessageHandler(e)}
@@ -59,11 +62,11 @@ const ChatAction = () => {
             setShowPicker={setShowPicker}
             setShowAttachments={setShowAttachments}
           />
-          <Attachment
+          {/* <Attachment
             showAttachments={showAttachments}
             setShowAttachments={setShowAttachments}
             setShowPicker={setShowPicker}
-          />
+          /> */}
         </ul>
 
         {/*Input*/}
@@ -86,4 +89,10 @@ const ChatAction = () => {
   )
 }
 
-export default ChatAction
+const ChatActionWithSocket = (props) => (
+    <SocketContext.Consumer>
+      {(socket) => <ChatAction {...props} socket ={socket} />}
+    </SocketContext.Consumer>
+  );
+  export default ChatActionWithSocket;
+  

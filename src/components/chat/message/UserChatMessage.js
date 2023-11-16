@@ -6,8 +6,8 @@ const UserChatMessage = () => {
   const endReference = useRef();
 
   const { messages } = useSelector((state) => state.chat);
-  console.log("messages");
-  console.log(messages);
+  // console.log("messages");
+  // console.log(messages);
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const UserChatMessage = () => {
 
   return (
     <div
-    className="mb-[60px] bg-[url('https://res.cloudinary.com/dmhcnhtng/image/upload/v1677358270/Untitled-1_copy_rpx8yb.jpg')]
+    className="mb-[60px] bg-[url('https://res.cloudinary.com/db6vq9hjg/image/upload/v1699512004/swglnascuweftkzfadmg.png')]
   bg-cover bg-no-repeat
   "
   >

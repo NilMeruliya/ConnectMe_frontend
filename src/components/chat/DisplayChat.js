@@ -4,8 +4,9 @@ import UserChatMessage from './message/UserChatMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserConversationMessages } from '../../itemSlices/chatSlice';
 import ChatAction from './actions/ChatAction';
+import { checkOnlineStatus, getUserConversationId } from '../../utils/chatUtil';
 
-const DisplayChat = () => {
+const DisplayChat = ({onlineUsers}) => {
     const dispatch = useDispatch();
   const { activeConversation, messages, status } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.user);
@@ -39,6 +40,8 @@ useEffect(() => {
         //       ? false
         //       : checkOnlineStatus(onlineUsers, user, activeConversation.users)
         //   }
+
+        online={ checkOnlineStatus(onlineUsers, user, activeConversation.users)}
         //   callUser={callUser}
         />
 

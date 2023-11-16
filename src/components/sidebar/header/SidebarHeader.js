@@ -21,7 +21,7 @@ const SidebarHeader = () => {
           </button>
           {/*user icons*/}
           <ul className="flex items-center gap-x-2 5">
-            <li>
+            {/* <li>
               <button className="btn">
                 <CommunityIcon className="dark:fill-dark_svg1" />
               </button>
@@ -30,12 +30,12 @@ const SidebarHeader = () => {
               <button className="btn">
                 <StoryIcon className="dark:fill-dark_svg1" />
               </button>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <button className="btn">
                 <ChatIcon className="dark:fill-dark_svg1" />
               </button>
-            </li>
+            </li> */}
             <li
               className="relative"
               onClick={() => setShowMenu((prev) => !prev)}

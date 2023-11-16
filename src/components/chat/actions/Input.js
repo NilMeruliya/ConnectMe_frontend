@@ -3,7 +3,7 @@ import React from 'react'
 const Input = ({inputMessage, setInputMessage, textReference}) => {
   const onChangeHandler = (e) => {
     setInputMessage(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
    
   };
   return (

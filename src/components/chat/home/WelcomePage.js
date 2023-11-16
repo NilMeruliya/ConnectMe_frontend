@@ -1,5 +1,7 @@
 import React from 'react'
 import Logo from '../../../logo/Connectme.ico'
+import Logo11 from "../../../logo/logo-removebg-preview.png"
+import logo111 from "../../../logo/logo111_prev_ui.png"
 
 const WelcomePage = () => {
   return (

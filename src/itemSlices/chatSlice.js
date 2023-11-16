@@ -75,7 +75,7 @@ const initialState = {
   );
 
   // send messages from the input to the backend
-  export const sendUserMessage = createAsyncThunk(
+  export const   sendUserMessage = createAsyncThunk(
     "message/send",
     async (values, { rejectWithValue }) => {
       const { token, inputMessage, chatId, files } = values;
@@ -108,35 +108,40 @@ export const chatSlice = createSlice({
       setActiveConversation: (state, action) => {
         state.activeConversation = action.payload;
       },
-    //   updateMessagesAndConversations: (state, action) => {
-    //     //update messages
-    //     let convo = state.activeConversation;
-    //     if (convo._id === action.payload.conversation._id) {
-    //       state.messages = [...state.messages, action.payload];
-    //     }
-    //     //update conversations
-    //     let conversation = {
-    //       ...action.payload.conversation,
-    //       latestMessage: action.payload,
-    //     };
-    //     let newConvos = [...state.conversations].filter(
-    //       (c) => c._id !== conversation._id
-    //     );
-    //     newConvos.unshift(conversation);
-    //     state.conversations = newConvos;
-    //   },
-    //   addFiles: (state, action) => {
-    //     state.files = [...state.files, action.payload];
-    //   },
-    //   clearFiles: (state, action) => {
-    //     state.files = [];
-    //   },
-    //   removeFileFromFiles: (state, action) => {
-    //     let index = action.payload;
-    //     let files = [...state.files];
-    //     let fileToRemove = [files[index]];
-    //     state.files = files.filter((file) => !fileToRemove.includes(file));
-    //   },
+      updateMessagesAndChats: (state, action) => {
+      
+        //update messages
+        let convo = state.activeConversation;
+        if (convo._id === action.payload.chat._id) {
+          state.messages = [...state.messages, action.payload];
+        }
+ 
+        //update conversations
+        let chat = {
+          ...action.payload.chat,
+          latestMessage: action.payload,
+        };
+        let newChats = [...state.conversations].filter(
+          (c) => c._id !== chat._id
+        );
+        newChats.unshift(chat);
+        state.conversations = newChats;
+      },
+
+      // addFiles: (state, action) => {
+      //   state.files = [...state.files, action.payload];
+      // },
+
+      // clearFiles: (state, action) => {
+      //   state.files = [];
+      // },
+
+      // removeFileFromFiles: (state, action) => {
+      //   let index = action.payload;
+      //   let files = [...state.files];
+      //   let fileToRemove = [files[index]];
+      //   state.files = files.filter((file) => !fileToRemove.includes(file));
+      // },
     },
     extraReducers(builder) {
       builder
@@ -173,7 +178,7 @@ export const chatSlice = createSlice({
         })
         .addCase(getUserConversationMessages.rejected, (state, action) => {
           state.status = "failed";
-          state.error = action.payload;
+          state.error = action.payload; 
         })
         .addCase(sendUserMessage.pending, (state, action) => {
           state.status = "loading";
@@ -203,7 +208,7 @@ export const chatSlice = createSlice({
 
   export const {
     setActiveConversation,
-    // updateMessagesAndConversations,
+    updateMessagesAndChats,
     // addFiles,
     // clearFiles,
     // removeFileFromFiles,

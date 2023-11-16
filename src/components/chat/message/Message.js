@@ -8,11 +8,11 @@ const Message = ({message, me, messageTime}) => {
   }`}>
 
 <div className={`relative h-full dark:text-dark_text1 p-2 rounded-lg
-        ${me ? "bg-green3" : "dark:bg-dark_bg2"}
+        ${me ? "bg-blue2" : "dark:bg-dark_bg2"}
         `}
         >
           {/*Message*/}
-          <p className="float-left h-full text-sm pb-4 ">
+          <p className="float-left h-full text-sm pb-4 min-w-[30px]">
             {message}
           </p>
 

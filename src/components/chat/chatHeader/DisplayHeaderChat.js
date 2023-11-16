@@ -2,9 +2,10 @@ import React from 'react'
 import { CallIcon, DotsIcon, SearchLargeIcon, VideoCallIcon } from '../../../svg'
 import { useSelector } from 'react-redux';
 import { capitalizeName } from '../../../utils/capitalizeNameUtil';
+import { getUserConversationName, getUserConversationPicture } from '../../../utils/chatUtil';
 
-const DisplayHeaderChat = () => {
-
+const DisplayHeaderChat = ({online}) => {
+  const { user } = useSelector((state) => state.user);
     const { activeConversation } = useSelector((state) => state.chat);
   return (
     <div className="h-[59px] dark:bg-dark_bg2 flex items-center p16 select-none">
@@ -15,7 +16,7 @@ const DisplayHeaderChat = () => {
         {/*Conversation image*/}
         <button className="btn">
           <img
-          src={activeConversation.picture}
+          src={getUserConversationPicture(user, activeConversation.users)}
             // src={
             //   activeConversation.isGroup
             //     ? activeConversation.picture
@@ -35,11 +36,10 @@ const DisplayHeaderChat = () => {
                     " "
                   )[0]
                 )} */}
-                {capitalizeName(activeConversation.name)}
+                {capitalizeName(getUserConversationName(user, activeConversation.users))}
           </h1>
           <span className="text-xs dark:text-dark_svg2">
-            {/* {online ? "online" : ""} */}
-            online
+            {online ? "online" : ""}
           </span>
         </div>
       </div>
@@ -60,7 +60,7 @@ const DisplayHeaderChat = () => {
           </li>
         ) : null} */}
 
-        <li>
+        {/* <li>
           <button className="btn">
             <VideoCallIcon  />
           </button>
@@ -80,7 +80,7 @@ const DisplayHeaderChat = () => {
           <button className="btn">
             <DotsIcon className="dark:fill-dark_svg1" />
           </button>
-        </li>
+        </li> */}
       </ul>
     </div>
   </div>

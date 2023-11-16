@@ -63,9 +63,9 @@ const Search = ({searchLength, setSearchResult}) => {
             onKeyDown={(e) => handleSearch(e)} // when we press the enter key, we call the handleSearch function.
           />
         </div>
-        <button className="btn">
+        {/* <button className="btn">
           <FilterIcon className="dark:fill-dark_svg2" />
-        </button>
+        </button> */}
       </div>
     </div>
   </div>

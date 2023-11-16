@@ -2,12 +2,13 @@ import React from 'react'
 import { dateHandler } from '../../../utils/dateUtil.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { openOrCreateUserConversations } from '../../../itemSlices/chatSlice.js';
-import { getUserConversationId } from '../../../utils/chatUtil.js';
+import { getUserConversationId, getUserConversationName, getUserConversationPicture } from '../../../utils/chatUtil.js';
 import { capitalizeName } from '../../../utils/capitalizeNameUtil.js';
+import SocketContext from '../../../context/SocketContext.js';
 
 
 
-const Chat = ({chatElement}) => {
+const Chat = ({chatElement, socket, online}) => {
 // console.log(chatElement);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -20,8 +21,9 @@ const Chat = ({chatElement}) => {
   };
 
   const openConversation = async () => {
-    dispatch(openOrCreateUserConversations(values));
-   
+    let newChat =  await dispatch(openOrCreateUserConversations(values));
+    console.log(newChat);
+    socket.emit("join chat", newChat.payload._id);
   };
 
   return (
@@ -40,8 +42,13 @@ const Chat = ({chatElement}) => {
         <div className='flex items-center gap-x-3'>
 
         {/* opposition picture */}
-            <div className='relative min-w-[50px] max-w-[50px] h-[50px] rounded-full overflow-hidden'>
-                <img src={chatElement.picture} alt={chatElement.name} className='w-full h-full object-cover ' />
+            <div className={`relative min-w-[50px] max-w-[50px] h-[50px] rounded-full overflow-hidden ${
+              online ? "online" : ""
+            }`}>
+                <img 
+                src={getUserConversationPicture(user, chatElement.users)}
+                alt="userPicture"
+                className='w-full h-full object-cover ' />
             </div>
 
              {/* opposition name and messages */}
@@ -49,7 +56,7 @@ const Chat = ({chatElement}) => {
 
             {/* name*/}
             <h1 className="font-bold flex items-center gap-x-2">
-             {capitalizeName(chatElement.name)}
+             {capitalizeName(getUserConversationName(user, chatElement.users))}
             </h1>
 
             {/* message */}
@@ -82,4 +89,11 @@ const Chat = ({chatElement}) => {
   )
 }
 
-export default Chat
+const ChatWithContext = (props) => (
+  <SocketContext.Consumer>
+    {(socket) => <Chat {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+export default ChatWithContext;
+
