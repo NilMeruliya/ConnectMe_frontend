@@ -6,7 +6,7 @@ import { getUserConversationMessages } from '../../itemSlices/chatSlice';
 import ChatAction from './actions/ChatAction';
 import { checkOnlineStatus, getUserConversationId } from '../../utils/chatUtil';
 
-const DisplayChat = ({onlineUsers}) => {
+const DisplayChat = ({onlineUsers, typing}) => {
     const dispatch = useDispatch();
   const { activeConversation, messages, status } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.user);
@@ -45,7 +45,7 @@ useEffect(() => {
         //   callUser={callUser}
         />
 
-<UserChatMessage />
+<UserChatMessage typing={typing} />
 <ChatAction />
         {/* {files.length > 0 ? (
           <FilesPreview />

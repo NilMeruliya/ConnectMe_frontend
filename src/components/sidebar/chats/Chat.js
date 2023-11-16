@@ -8,7 +8,7 @@ import SocketContext from '../../../context/SocketContext.js';
 
 
 
-const Chat = ({chatElement, socket, online}) => {
+const Chat = ({chatElement, socket, online, typing}) => {
 // console.log(chatElement);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -63,11 +63,20 @@ const Chat = ({chatElement, socket, online}) => {
             <div>
               <div className="flex items-center gap-x-1 dark:text-dark_text2">
                 <div className="flex-1 items-center gap-x-1 dark:text-dark_text2">
-                 {/* {chatElement?.latestMessage?.message.length > 27 ? `${chatElement?.latestMessage?.message.substring(0, 27)}...` : chatElement?.latestMessage?.message} */}
 
+                {typing === chatElement._id ? (
+                    <p className="text-blue2">Typing...</p>
+                  ) : (
+                    <p>
+                      {chatElement?.latestMessage?.message.length > 27 ? `${chatElement?.latestMessage?.message.substring(0, 27)}...` : chatElement?.latestMessage?.message}
+                    </p>
+                  )}
+
+                 {/* {chatElement?.latestMessage?.message.length > 27 ? `${chatElement?.latestMessage?.message.substring(0, 27)}...` : chatElement?.latestMessage?.message} */}
+{/* 
                  {
                   chatElement?.latestMessage?.message
-                 }
+                 } */}
                 
                 </div>
               </div>

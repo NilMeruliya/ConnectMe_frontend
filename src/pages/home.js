@@ -6,6 +6,7 @@ import { getUserConversations, updateMessagesAndChats } from '../itemSlices/chat
 import WelcomePage from '../components/chat';
 import DisplayChat from '../components/chat/DisplayChat';
 import SocketContext from '../context/SocketContext';
+// import Call from '../components/chat/call/Call';
 
 
 
@@ -19,6 +20,9 @@ const Home = ({socket}) => {
   // console.log("activeConversation");
   // console.log(activeConversation);
   const [onlineUsers, setOnlineUsers] = useState([]);
+
+    //typing
+    const [typing, setTyping] = useState(false);
 
   //join user into the socket io
   useEffect(() => {
@@ -46,9 +50,9 @@ const Home = ({socket}) => {
       dispatch(updateMessagesAndChats(message));
     });
 
-    // //listening when a user is typing
-    // socket.on("typing", (conversation) => setTyping(conversation));
-    // socket.on("stop typing", () => setTyping(false));
+    //listening when a user is typing
+    socket.on("typing", (chat) => setTyping(chat));
+    socket.on("stop typing", () => setTyping(false));
 
     // eslint-disable-next-line
   }, []);
@@ -61,7 +65,7 @@ const Home = ({socket}) => {
 
         <Sidebar
          onlineUsers={onlineUsers}
-        //   typing={typing}
+          typing={typing}
            />
 
 
@@ -70,7 +74,7 @@ const Home = ({socket}) => {
           <DisplayChat
             onlineUsers={onlineUsers}
             // callUser={callUser}
-            // typing={typing}
+            typing={typing}
           />
         ) : (
           <WelcomePage />
@@ -95,6 +99,8 @@ const Home = ({socket}) => {
         totalSecInCall={totalSecInCall}
         setTotalSecInCall={setTotalSecInCall}
       /> */}
+
+      
     </div>
   </>
   )

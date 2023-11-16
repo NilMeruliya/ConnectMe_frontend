@@ -1,18 +1,19 @@
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux';
 import Message from './Message';
+import Typing from './Typing';
 
-const UserChatMessage = () => {
+const UserChatMessage = ({typing}) => {
   const endReference = useRef();
+  const { messages, activeConversation } = useSelector((state) => state.chat);
 
-  const { messages } = useSelector((state) => state.chat);
   // console.log("messages");
   // console.log(messages);
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
       endReference.current.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, typing]);
 
   return (
     <div
@@ -33,6 +34,9 @@ const UserChatMessage = () => {
                   me = {user._id === messageElem.sender._id}
                 />
           ))}
+          {typing === activeConversation._id ? <Typing /> : null}
+            {/* {typing ? <Typing /> : ""} */}
+
       <div className="mt-2"
        ref={endReference}
        ></div>
