@@ -11,7 +11,7 @@ const initialState = {
     activeConversation: {},
     messages: [],
     notifications: [],
-    // files: [],
+    files: [],
   };
 
   // get all conversations
@@ -78,12 +78,12 @@ const initialState = {
   export const   sendUserMessage = createAsyncThunk(
     "message/send",
     async (values, { rejectWithValue }) => {
-      const { token, inputMessage, chatId, files } = values;
+      const { token, message, chatId, files } = values;
       try {
         const { data } = await axios.post(
           MESSAGE_ENDPOINT,
           {
-            message: inputMessage,
+            message: message,
             chatId,
             files,
           },
@@ -128,20 +128,20 @@ export const chatSlice = createSlice({
         state.conversations = newChats;
       },
 
-      // addFiles: (state, action) => {
-      //   state.files = [...state.files, action.payload];
-      // },
+      addFiles: (state, action) => {
+        state.files = [...state.files, action.payload];
+      },
 
-      // clearFiles: (state, action) => {
-      //   state.files = [];
-      // },
+      clearFiles: (state, action) => {
+        state.files = [];
+      },
 
-      // removeFileFromFiles: (state, action) => {
-      //   let index = action.payload;
-      //   let files = [...state.files];
-      //   let fileToRemove = [files[index]];
-      //   state.files = files.filter((file) => !fileToRemove.includes(file));
-      // },
+      removeFileFromFiles: (state, action) => {
+        let index = action.payload;
+        let files = [...state.files];
+        let fileToRemove = [files[index]];
+        state.files = files.filter((file) => !fileToRemove.includes(file));
+      },
     },
     extraReducers(builder) {
       builder
@@ -209,9 +209,9 @@ export const chatSlice = createSlice({
   export const {
     setActiveConversation,
     updateMessagesAndChats,
-    // addFiles,
-    // clearFiles,
-    // removeFileFromFiles,
+    addFiles,
+    clearFiles,
+    removeFileFromFiles,
   } = chatSlice.actions;
 
   export default chatSlice.reducer;

@@ -68,15 +68,13 @@ const Chat = ({chatElement, socket, online, typing}) => {
                     <p className="text-blue2">Typing...</p>
                   ) : (
                     <p>
-                      {chatElement?.latestMessage?.message.length > 27 ? `${chatElement?.latestMessage?.message.substring(0, 27)}...` : chatElement?.latestMessage?.message}
+                      {chatElement?.latestMessage?.message?.length > 27 ? `${chatElement?.latestMessage?.message.substring(0, 27)}...` : chatElement?.latestMessage?.message}
+
+                      {/* {
+                        chatElement?.latestMessage?.message
+                      } */}
                     </p>
                   )}
-
-                 {/* {chatElement?.latestMessage?.message.length > 27 ? `${chatElement?.latestMessage?.message.substring(0, 27)}...` : chatElement?.latestMessage?.message} */}
-{/* 
-                 {
-                  chatElement?.latestMessage?.message
-                 } */}
                 
                 </div>
               </div>

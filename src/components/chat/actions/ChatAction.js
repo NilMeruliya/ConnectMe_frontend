@@ -14,7 +14,7 @@ const ChatAction = ({socket}) => {
     const { activeConversation, status } = useSelector((state) => state.chat);
     const { user } = useSelector((state) => state.user);
     const { token } = user;
-    const [inputMessage, setInputMessage] = useState("");
+    const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const [showPicker, setShowPicker] = useState(false);
     const [showAttachments, setShowAttachments] = useState(false);
@@ -22,7 +22,7 @@ const ChatAction = ({socket}) => {
     const textReference = useRef();
 
     const values = {
-        inputMessage,
+        message,
         chatId: activeConversation._id,
         files: [],
         token,
@@ -38,7 +38,7 @@ const ChatAction = ({socket}) => {
         let newMessage = await dispatch(sendUserMessage(values));
         // console.log("new message:", newMessage);
         socket.emit("send message", newMessage.payload);
-        setInputMessage("")
+        setMessage("")
         setLoading(false);
       };
 
@@ -56,23 +56,23 @@ const ChatAction = ({socket}) => {
         <ul className="flex gap-x-2">
           <Emoji
             textReference={textReference}
-            inputMessage={inputMessage}
-            setInputMessage={setInputMessage}
+            message={message}
+            setMessage={setMessage}
             showPicker={showPicker}
             setShowPicker={setShowPicker}
             setShowAttachments={setShowAttachments}
           />
-          {/* <Attachment
+          <Attachment
             showAttachments={showAttachments}
             setShowAttachments={setShowAttachments}
             setShowPicker={setShowPicker}
-          /> */}
+          />
         </ul>
 
         {/*Input*/}
         <Input 
-        inputMessage={inputMessage}
-        setInputMessage={setInputMessage}
+        message={message}
+        setMessage={setMessage}
         textReference={textReference} 
          />
 

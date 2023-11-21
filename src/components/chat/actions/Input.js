@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import SocketContext from '../../../context/SocketContext';
 import { useSelector } from 'react-redux';
 
-const Input = ({inputMessage, setInputMessage, textReference, socket}) => {
+const Input = ({message, setMessage, textReference, socket}) => {
 
   const { activeConversation } = useSelector((state) => state.chat);
   const [typing, setTyping] = useState(false);
   const onChangeHandler = (e) => {
-    setInputMessage(e.target.value);
+    setMessage(e.target.value);
     // console.log(e.target.value);
     if (!typing) {
       setTyping(true);
@@ -31,7 +31,7 @@ const Input = ({inputMessage, setInputMessage, textReference, socket}) => {
         type="text"
         className="dark:bg-dark_hover1 dark:text-dark_text1 outline-none h-[45px] w-full flex-1 rounded-lg pl-4"
         placeholder="Type a message"
-        value={inputMessage}
+        value={message}
         onChange={onChangeHandler}
         ref={textReference}
       />

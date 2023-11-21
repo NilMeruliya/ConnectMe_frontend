@@ -4,11 +4,12 @@ import UserChatMessage from './message/UserChatMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserConversationMessages } from '../../itemSlices/chatSlice';
 import ChatAction from './actions/ChatAction';
-import { checkOnlineStatus, getUserConversationId } from '../../utils/chatUtil';
+import { checkOnlineStatus } from '../../utils/chatUtil';
+import PreviewFile from "../../components/chat/preview/PreviewFile.js"
 
 const DisplayChat = ({onlineUsers, typing}) => {
     const dispatch = useDispatch();
-  const { activeConversation, messages, status } = useSelector((state) => state.chat);
+  const { activeConversation, files } = useSelector((state) => state.chat);
   const { user } = useSelector((state) => state.user);
 
   const { token } = user;
@@ -45,18 +46,17 @@ useEffect(() => {
         //   callUser={callUser}
         />
 
-<UserChatMessage typing={typing} />
-<ChatAction />
-        {/* {files.length > 0 ? (
-          <FilesPreview />
+
+        {files.length > 0 ? (
+          <PreviewFile />
         ) : (
           <>
           
-            <ChatMessages typing={typing} />
+            <UserChatMessage typing={typing} />
         
-            <ChatActions />
+            <ChatAction />
           </>
-        )} */}
+        )}
 
       
    

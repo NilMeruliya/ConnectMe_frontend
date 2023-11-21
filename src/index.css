@@ -40,8 +40,17 @@
         overflow-x: hidden;
       }
 
+      .hview {
+        height: calc(100vh - 290px);
+        padding: 8px 0;
+      }
+      
       .online {
-        border: 2px solid #3E7B96;
+        border: 2px solid #86bfd7;
+      }
+
+      .fileThumbnail:hover .removeFileIcon {
+        display: block;
       }
 
       .overflow_scrollbar {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import EmojiPicker from "emoji-picker-react";
 import { CloseIcon, EmojiIcon } from '../../../svg'
 
-const Emoji = ({inputMessage, setInputMessage, showPicker, setShowPicker, setShowAttachments, textReference}) => {
+const Emoji = ({message, setMessage, showPicker, setShowPicker, setShowAttachments, textReference}) => {
 
   const [cursorPosition, setCursorPosition] = useState();
 
@@ -16,10 +16,10 @@ const Emoji = ({inputMessage, setInputMessage, showPicker, setShowPicker, setSho
     const { emoji } = emojiData;
     const reference = textReference.current; // reference of the cursor
     reference.focus();
-    const start = inputMessage.substring(0, reference.selectionStart);
-    const end = inputMessage.substring(reference.selectionStart);
+    const start = message.substring(0, reference.selectionStart);
+    const end = message.substring(reference.selectionStart);
     const newTextInput = start + emoji + end;
-    setInputMessage(newTextInput);
+    setMessage(newTextInput);
     setCursorPosition(start.length + emoji.length);
   };
 

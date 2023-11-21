@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SocketContext from "./context/SocketContext";
 // import { logout } from "./itemSlices/userSlice";
 
@@ -36,6 +36,11 @@ const App = () => {
 
   // console.log(user);
   // console.log(token);
+
+
+    const { files } = useSelector((state) => state.chat);
+    console.log("files");
+  console.log(files); // it returns user like below
   return (
     <>
       <div className="dark">
