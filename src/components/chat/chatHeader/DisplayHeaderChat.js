@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { capitalizeName } from '../../../utils/capitalizeNameUtil';
 import { getUserConversationName, getUserConversationPicture } from '../../../utils/chatUtil';
 
-const DisplayHeaderChat = ({online}) => {
+const DisplayHeaderChat = ({online, callUser}) => {
   const { user } = useSelector((state) => state.user);
     const { activeConversation } = useSelector((state) => state.chat);
   return (
@@ -45,14 +45,14 @@ const DisplayHeaderChat = ({online}) => {
       </div>
       {/*Right*/}
       <ul className="flex items-center gap-x-2.5">
-        {/* {1 == 1 ? (
+        {1 == 1 ? (
           <li onClick={() => callUser()}>
             <button className="btn">
               <VideoCallIcon />
             </button>
           </li>
         ) : null}
-        {1 == 1 ? (
+        {/* {1 == 1 ? (
           <li>
             <button className="btn">
               <CallIcon />
@@ -60,18 +60,8 @@ const DisplayHeaderChat = ({online}) => {
           </li>
         ) : null} */}
 
-        {/* <li>
-          <button className="btn">
-            <VideoCallIcon  />
-          </button>
-        </li>
-        <li>
-          <button className="btn">
-            <CallIcon  />
-          </button>
-        </li>
 
-        <li>
+        {/* <li>
           <button className="btn">
             <SearchLargeIcon className="dark:fill-dark_svg1" />
           </button>
