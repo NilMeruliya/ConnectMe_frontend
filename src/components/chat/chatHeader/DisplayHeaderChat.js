@@ -16,12 +16,12 @@ const DisplayHeaderChat = ({online, callUser}) => {
         {/*Conversation image*/}
         <button className="btn">
           <img
-          src={getUserConversationPicture(user, activeConversation.users)}
-            // src={
-            //   activeConversation.isGroup
-            //     ? activeConversation.picture
-            //     : getConversationPicture(user, activeConversation.users)
-            // }
+          // src={getUserConversationPicture(user, activeConversation.users)}
+            src={
+              activeConversation.isGroup
+                ? activeConversation.picture
+                : getUserConversationPicture(user, activeConversation.users)
+            }
             alt={activeConversation.name}
             className="w-full h-full rounded-full object-cover"
           />
@@ -29,14 +29,12 @@ const DisplayHeaderChat = ({online, callUser}) => {
         {/*Conversation name and online status*/}
         <div className="flex flex-col">
           <h1 className="dark:text-white text-md font-bold">
-            {/* {activeConversation.isGroup
+            {activeConversation.isGroup
               ? activeConversation.name
-              : capitalize(
-                  getConversationName(user, activeConversation.users).split(
-                    " "
-                  )[0]
-                )} */}
-                {capitalizeName(getUserConversationName(user, activeConversation.users))}
+              : capitalizeName(
+                  getUserConversationName(user, activeConversation.users)
+                )}
+                {/* {capitalizeName(getUserConversationName(user, activeConversation.users))} */}
           </h1>
           <span className="text-xs dark:text-dark_svg2">
             {online ? "online" : ""}

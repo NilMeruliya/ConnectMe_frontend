@@ -13,9 +13,9 @@ const MessageFile = ({ FileMessage, message, me }) => {
     }`}
   >
     {/*Message Container*/}
-    {/* <div className="relative">
+    <div className="relative">
  
-      {!me && message.conversation.isGroup && (
+      {!me && message.chat.isGroup && (
         <div className="absolute top-0.5 left-[-37px]">
           <img
             src={message.sender.picture}
@@ -23,7 +23,7 @@ const MessageFile = ({ FileMessage, message, me }) => {
             className="w-8 h-8 rounded-full"
           />
         </div>
-      )} */}
+      )}
 
       <div
         className={`relative h-full dark:text-dark_text1 rounded-lg
@@ -58,7 +58,7 @@ const MessageFile = ({ FileMessage, message, me }) => {
           </span>
         ) : null}
       </div>
-    {/* </div> */}
+    </div>
   </div>
   )
 }

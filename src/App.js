@@ -8,6 +8,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import { useDispatch, useSelector } from "react-redux";
 import SocketContext from "./context/SocketContext";
+import Donate from "./pages/Donate";
 // import { logout } from "./itemSlices/userSlice";
 
 // socket.io
@@ -37,10 +38,6 @@ const App = () => {
   // console.log(user);
   // console.log(token);
 
-
-    const { files } = useSelector((state) => state.chat);
-    console.log("files");
-  console.log(files); // it returns user like below
   return (
     <>
       <div className="dark">
@@ -66,6 +63,12 @@ const App = () => {
               // path="/register"
               // element={!token ? <Register /> : <Navigate to={"/"} />}
               element={<Register socket={socket}/> }
+            />
+               <Route
+            exact path="/donate"
+              // path="/register"
+              // element={!token ? <Register /> : <Navigate to={"/"} />}
+              element={<Donate socket={socket}/> }
             />
           </Routes>
        

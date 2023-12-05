@@ -43,6 +43,7 @@ const UserChatMessage = ({ typing }) => {
 {/*Message text*/}
               {messageElem?.message?.length > 0 ? (
                 <Message
+                messageElem={messageElem}
                   message={messageElem.message}
                   messageTime={messageElem.createdAt}
                   key={messageElem._id}

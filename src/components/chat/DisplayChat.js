@@ -34,17 +34,17 @@ const DisplayChat = ({ onlineUsers, typing, callUser }) => {
       <div>
         {/*Chat header*/}
         <DisplayHeaderChat
-          //   online={
-          //     activeConversation.isGroup
-          //       ? false
-          //       : checkOnlineStatus(onlineUsers, user, activeConversation.users)
-          //   }
+            online={
+              activeConversation.isGroup
+                ? false
+                : checkOnlineStatus(onlineUsers, user, activeConversation.users)
+            }
 
-          online={checkOnlineStatus(
-            onlineUsers,
-            user,
-            activeConversation.users
-          )}
+          // online={checkOnlineStatus(
+          //   onlineUsers,
+          //   user,
+          //   activeConversation.users
+          // )}
           callUser={callUser}
         />
 

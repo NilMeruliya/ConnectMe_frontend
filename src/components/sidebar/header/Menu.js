@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../itemSlices/userSlice.js';
 
-const Menu = () => {
+const Menu = ({setShowCreateGroup}) => {
     // const {user} = useSelector((state) => state.user);
     const dispatch = useDispatch();
   return (
@@ -11,19 +11,11 @@ const Menu = () => {
         <ul>
           <li
             className="py-3 pl-5 cursor-pointer hover:bg-dark_bg3"
-            // onClick={() => setShowCreateGroup(true)}
+            onClick={() => setShowCreateGroup(true)}
           >
             <span>New group</span>
           </li>
-          {/* <li className="py-3 pl-5 cursor-pointer hover:bg-dark_bg3">
-            <span>New community</span>
-          </li> */}
-          {/* <li className="py-3 pl-5 cursor-pointer hover:bg-dark_bg3">
-            <span>Starred messaged</span>
-          </li> */}
-          <li className="py-3 pl-5 cursor-pointer hover:bg-dark_bg3">
-            <span>Setting</span>
-          </li>
+         
           <li
             className="py-3 pl-5 cursor-pointer hover:bg-dark_bg3"
             onClick={() => dispatch(logout())}

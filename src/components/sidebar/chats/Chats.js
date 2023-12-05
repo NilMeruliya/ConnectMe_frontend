@@ -26,7 +26,8 @@ const Chats = ({onlineUsers, typing }) => {
                return ( 
         <Chat chatElement={chatElement}
          key={chatElement._id}
-         online={check ? true : false}
+        //  online={check ? true : false}
+         online={!chatElement.isGroup && check ? true : false}
          typing={typing}
          />
         )

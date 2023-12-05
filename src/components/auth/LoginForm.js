@@ -35,7 +35,7 @@ export default function LoginForm() {
     <div className="min-h-screen w-full flex items-center justify-center overflow-hidden">
     
       <div className="w-full max-w-md space-y-8 p-10 dark:bg-dark_bg2 rounded-xl">
-      <img src="" alt="" srcset="" />
+      <img src="" alt="" srcSet="" />
      
         <div className="text-center dark:text-dark_text1">
           <h2 className="mt-6 text-3xl font-bold">Welcome back</h2>

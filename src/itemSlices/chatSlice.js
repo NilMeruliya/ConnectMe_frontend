@@ -38,11 +38,11 @@ const initialState = {
   export const openOrCreateUserConversations = createAsyncThunk(
     "chat/openorcreate",
     async (values, { rejectWithValue }) => {
-      const {token, receiverId} = values;
+      const {token, receiverId, isGroup} = values;
       try {
 
         // here we are sending receiverId to the backend because we create a new conversation with the receiverId
-        const { data } = await axios.post(CHAT_ENDPOINT, {receiverId}, {
+        const { data } = await axios.post(CHAT_ENDPOINT, {receiverId, isGroup}, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -100,6 +100,27 @@ const initialState = {
     }
   );
   
+
+  export const createGroupConversation = createAsyncThunk(
+    "conervsation/create_group",
+    async (values, { rejectWithValue }) => {
+      const { token, name, users } = values;
+      try {
+        const { data } = await axios.post(
+          `${CHAT_ENDPOINT}/group`,
+          { name, users },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return data;
+      } catch (error) {
+        return rejectWithValue(error.message);
+      }
+    }
+  );
 
 export const chatSlice = createSlice({
     name: "chat",

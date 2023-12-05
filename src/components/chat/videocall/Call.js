@@ -21,12 +21,6 @@ const Call = ({
   const [showActions, setShowActions] = useState(false);
   const [toggle, setToggle] = useState(false);
 
-  console.log("receiving call");
-  console.log(receiveingCall);
-
-  console.log("call accepted");
-  console.log(callAccepted);
-
   return (
     <>
       <div

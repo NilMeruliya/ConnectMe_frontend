@@ -17,6 +17,7 @@ const Chat = ({chatElement, socket, online, typing}) => {
   
   const values = {
     receiverId: getUserConversationId(user, chatElement.users),
+    isGroup: chatElement.isGroup ? chatElement._id : false,
    token: user.token,
   };
 
@@ -46,7 +47,7 @@ const Chat = ({chatElement, socket, online, typing}) => {
               online ? "online" : ""
             }`}>
                 <img 
-                src={getUserConversationPicture(user, chatElement.users)}
+                src={chatElement.isGroup ? chatElement.picture : getUserConversationPicture(user, chatElement.users)}
                 alt="userPicture"
                 className='w-full h-full object-cover ' />
             </div>
@@ -56,7 +57,7 @@ const Chat = ({chatElement, socket, online, typing}) => {
 
             {/* name*/}
             <h1 className="font-bold flex items-center gap-x-2">
-             {capitalizeName(getUserConversationName(user, chatElement.users))}
+            {chatElement.isGroup ? chatElement.name : capitalizeName(getUserConversationName(user, chatElement.users))}
             </h1>
 
             {/* message */}

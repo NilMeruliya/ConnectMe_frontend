@@ -91,7 +91,7 @@ const Home = ({ socket }) => {
     });
     // eslint-disable-next-line
   }, []);
-  console.log("socket id", socketId);
+  // console.log("socket id", socketId);
 
   //--call user funcion
   const callUser = () => {
