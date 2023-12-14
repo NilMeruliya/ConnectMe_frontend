@@ -23,6 +23,7 @@ module.exports = {
         dark_hover1: "#2A3942",
         blue1: "#53BDEB",
         blue2: "#3E7B96",
+        blue3: "#75B2CC",
         green1: "#00A884",
         green2: "#008069",
         green3: "#005C4B",

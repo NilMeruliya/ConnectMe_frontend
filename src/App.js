@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route,
-  //  Navigate
+   Navigate
    } from "react-router-dom";
 import { io } from "socket.io-client";
 import Home from "./pages/home";
@@ -32,8 +32,8 @@ const App = () => {
   //       status: ""
   //       token: ""
 
-  // const { user } = useSelector((state) => state.user);
-  // const { token } = user;
+  const { user } = useSelector((state) => state.user);
+  const { token } = user;
 
   // console.log(user);
   // console.log(token);
@@ -48,27 +48,27 @@ const App = () => {
             <Route
             exact path="/"
               // path="/"
-              // element={token ? <Home socket={socket}/> : <Navigate to={"/login"} /> 
-              // }
-              element={<Home socket={socket}/> }
+              element={token ? <Home socket={socket}/> : <Navigate to={"/login"} /> 
+              }
+              // element={<Home socket={socket}/> }
             />
             <Route
             exact path="/login"
               // path="/login"
-              // element={!token ? <Login /> : <Navigate to={"/"} />}
-              element={<Login socket={socket}/> }
+              element={!token ? <Login /> : <Navigate to={"/"} />}
+              // element={<Login socket={socket}/> }
             />
             <Route
             exact path="/register"
               // path="/register"
-              // element={!token ? <Register /> : <Navigate to={"/"} />}
-              element={<Register socket={socket}/> }
+              element={!token ? <Register /> : <Navigate to={"/"} />}
+              // element={<Register socket={socket}/> }
             />
                <Route
             exact path="/donate"
               // path="/register"
-              // element={!token ? <Register /> : <Navigate to={"/"} />}
-              element={<Donate socket={socket}/> }
+              element={token ? <Donate /> : <Navigate to={"/"} />}
+              // element={<Donate socket={socket}/> }
             />
           </Routes>
        

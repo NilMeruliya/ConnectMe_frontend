@@ -34,7 +34,7 @@ export default function LoginForm() {
   return (
     <div className="min-h-screen w-full flex items-center justify-center overflow-hidden">
     
-      <div className="w-full max-w-md space-y-8 p-10 dark:bg-dark_bg2 rounded-xl">
+      <div className="w-[80%] max-w-md space-y-8 p-10 dark:bg-dark_bg2 rounded-xl">
       <img src="" alt="" srcSet="" />
      
         <div className="text-center dark:text-dark_text1">
@@ -66,7 +66,7 @@ export default function LoginForm() {
           }
          
           <button
-            className="w-full flex justify-center bg-blue2 text-gray-100 p-4 rounded-full tracking-wide
+            className="w-full flex justify-center bg-blue3 text-black-100 p-4 rounded-full tracking-wide
           font-semibold focus:outline-none hover:bg-blue1 shadow-lg cursor-pointer transition ease-in duration-300
           "
             type="submit"

@@ -7,17 +7,23 @@ const Contact = ({contact, setSearchResult, socket}) => {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  // const { token } = user;
+  const { token } = user;
   // const { activeConversation } = useSelector((state) => state.chat);
+  
   
   const values = {
    receiverId: contact._id,
-   token: user.token,
+   token,
+  //  isGroup: activeConversation.isGroup
   };
+
+  console.log("values: " + JSON.stringify(values));
 
   const openConversation = async () => {
   let newChat = await dispatch(openOrCreateUserConversations(values));
   setSearchResult([]);
+  console.log("new chat");
+  console.log(newChat);
   socket.emit("join chat", newChat.payload._id);
   };
 

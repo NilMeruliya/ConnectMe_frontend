@@ -5,7 +5,7 @@ import logo111 from "../../../logo/logo111_prev_ui.png"
 
 const WelcomePage = () => {
   return (
-    <div className="h-full w-full dark:bg-dark_bg4 select-none border-l dark:border-l-dark_border2 border-b-[6px] border-b-blue2">
+    <div className="h-full w-full dark:bg-dark_bg4 select-none border-l dark:border-l-dark_border2">
  
     <div className="-mt-1.5 w-full h-full flex flex-col gap-y-8 items-center justify-center">
       <span>

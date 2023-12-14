@@ -18,7 +18,7 @@ const Donate = () => {
         if (donationAmount && donorName && paymentCompleted) {
           generatePDF();
         }
-
+        // eslint-disable-next-line
       }, [donationAmount, donorName, paymentCompleted]);
     
       const handleInputChange = (e) => {
@@ -43,7 +43,7 @@ const Donate = () => {
         try {
           const pdfDoc = await PDFDocument.create();
           const page = pdfDoc.addPage([600, 300]);
-          const { height } = page.getSize();
+          const { width, height } = page.getSize();
           const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
       
           page.drawText('ConnectMe Charity Trust', {
@@ -99,7 +99,7 @@ const Donate = () => {
             color: rgb(0, 0, 0),
           });
       
-          page.drawText('______________________', {
+          page.drawText('___________', {
             x: 30,
             y: height - 200,
             size: 12,

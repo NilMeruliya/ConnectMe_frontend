@@ -9,7 +9,7 @@ const Sidebar = ({onlineUsers, typing}) => {
   const [searchResult, setSearchResult] = useState([]);
   // console.log(searchResult);
   return (
-    <div className="flex30 max-w-[25%] h-full select-none">
+    <div className="flex30 w-[40%] sm:w-[40%] md:max-w-[30%] h-full select-none">
 
       <SidebarHeader />
 

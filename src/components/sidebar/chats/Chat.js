@@ -30,7 +30,7 @@ const Chat = ({chatElement, socket, online, typing}) => {
   return (
     <li
        onClick={() => openConversation()}
-       className={`list-none h-[72px] w-full dark:bg-dark_bg1 hover:${
+       className={`list-none md:h-[75px] sm:h-[95px] w-full dark:bg-dark_bg1 hover:${
         chatElement._id !== activeConversation._id ? "dark:bg-dark_bg2" : ""
       } cursor-pointer dark:text-dark_text1 px-[10px] ${
         chatElement._id === activeConversation._id ? "dark:bg-dark_hover1" : ""
